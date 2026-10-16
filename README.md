@@ -1,6 +1,6 @@
 # MTL-XF-040 — Phishing URL Detection Security Triage Intelligence
 
-**Track:** Cross-Functional · **Sector:** Commercial enterprise information security · **Team:** 6–8 · **Duration:** 8 weeks
+**Track:** Cross-Functional · **Sector:** Commercial enterprise information security · **Team:** 3–5 · **Duration:** 8 weeks
 
 ## The business problem
 
