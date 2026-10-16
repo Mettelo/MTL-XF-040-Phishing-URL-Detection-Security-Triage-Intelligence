@@ -24,3 +24,13 @@ Assign named people to all seven [brief roles](../project/PROJECT_BRIEF.md). Eve
 Create ten defanged triage cases, including false positives and false negatives, with evidence preservation, analyst action and incident-response escalation.
 
 Maintain D1–D12/AC1–AC12/DT1–DT10 evidence index with owner, distinct reviewer, state and final-commit path. Connect numeric claims to frozen source and code/configuration. Record all manual adjustments, excluded cases and limitations; preserve an insufficient-evidence case.
+
+## Required business-output artefacts
+
+- **D5 Phishing population and feature-availability audit:** data/curated/phishing-population-and-feature-availability-audit.csv and docs/05-kpi-catalogue/phishing-population-and-feature-availability-audit.md.
+- **D6 Offline lexical detection evaluation:** docs/06-analysis/offline-lexical-detection-evaluation.md plus machine-readable evaluation_results.csv.
+- **D7 Three-band analyst triage policy:** docs/07-decision-framework/three-band-analyst-triage-policy.csv plus policy.md.
+- **D8 SOC triage dashboard:** dashboard/README.md, runnable dashboard/prototype and static review export.
+- **D11 SOC response playbook and tabletop:** deliverables/soc-response-playbook-and-tabletop.pdf plus editable slides and supporting cards/runbook.
+
+Index these under SC1–SC5 with author, distinct reviewer, executed result and final commit. Treat these paths as the default delivery contract; an equivalent tool-specific format requires an explicit documented mapping.

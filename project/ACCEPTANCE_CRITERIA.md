@@ -10,14 +10,79 @@ Acceptance requires executed evidence, not headings. Security Model Assurance An
 | AC2 | D2 | Every required file/field is verified and approved; unsupported requirements explicitly block G1. |
 | AC3 | D3 | Input=retained+excluded+quarantined exactly; no unexplained join multiplication; clean-run instructions exist. |
 | AC4 | D4 | Every treatment has affected count, reason, owner and reviewer; no silent row loss or coercion. |
-| AC5 | D5 | All seven reviewed; K1–K5 reconcile independently and in BI on full cohort and one filtered slice. |
-| AC6 | D6 | Baseline and alternative results, population/class counts, uncertainty, negative findings and feature/timing audit retained; no test-driven tuning. |
-| AC7 | D7 | Both policies and sensitivity outputs supplied; every action has evidence, eligibility, owner, next review and uncertainty. Include a defer case. |
-| AC8 | D8 | Five metric/filter checks pass; frozen scope and limitations survive export; static copy/user guide require no paid access. |
+| AC5 | D5 / SC1 | label=0 becomes phishing_event=1; initial class counts reconcile to 100,945 phishing/134,850 legitimate; zero domain overlap across splits; raw URL/Domain/FILENAME/Title identifiers excluded from core. |
+| AC6 | D6 / SC2 | Training-only preprocessing; no live URL access; webpage/unverifiable corpus signals excluded from receipt-time model; report actual test FPR even if target is missed. |
+| AC7 | D7 / SC3 | Nonzero high-band coverage required for a viable threshold; if infeasible mark target unmet; every case has explanation, human owner, action/escalation and evidence hash; no automatic URL blocking. |
+| AC8 | D8 / SC4 | Ten flagged legitimate among 1,000 legitimate=1% FPR; reviewer traces a false positive and missed phishing case; no clickable malicious URLs appear in exports. |
 | AC9 | D9 | All ten tests and three tasks pass; zero unresolved critical/high defects. |
 | AC10 | D10 | Second member reproduces all seven KPIs and policy queue from approved bytes; environment, elapsed time and discrepancies recorded. |
-| AC11 | D11 | Every numeric claim links tested evidence; costs/benefits and operational targets are labelled assumptions unless measured. |
+| AC11 | D11 / SC5 | Two tabletop tasks pass: resolve legitimate high-score alert and escalate confirmed-in-fixture phishing; no browsing, DNS resolution, credential collection or claim of current live threat status. |
 | AC12 | D12 | All D/AC/DT evidence links resolve at final commit/tag; individual contribution is demonstrated beyond bulk upload or commit count. |
+
+## SC1–SC5 — Business output success contracts
+
+These requirements supplement AC1–AC12 and are mandatory. Record approval at G1, then execute against final outputs. All five require PASS with traceable evidence, or a formally approved scope revision; an unmet model-performance target must be reported as unmet and reflected in the recommendation.
+
+### SC1 / D5 — Phishing population and feature-availability audit
+
+**Accountable delivery role:** SOC and Threat Intelligence Analyst. **Business reviewer:** Security Operations Centre Manager. **Independent assurance:** Security Model Assurance Analyst.
+
+**Required artefact:** data/curated/phishing-population-and-feature-availability-audit.csv and docs/05-kpi-catalogue/phishing-population-and-feature-availability-audit.md.
+
+**Content:** 235,795 source records, label map, duplicate/conflict/quarantine counts, offline registrable-domain grouping and every predictor classified lexical/webpage/corpus-derived/identifier.
+
+**Pass condition:** label=0 becomes phishing_event=1; initial class counts reconcile to 100,945 phishing/134,850 legitimate; zero domain overlap across splits; raw URL/Domain/FILENAME/Title identifiers excluded from core.
+
+**Evidence to retain:** actual output at final commit, source/configuration lineage, executed expected-versus-actual checks, reviewer identity/date and PASS/FAIL/BLOCKED. Do not mark complete from document presence alone.
+
+### SC2 / D6 — Offline lexical detection evaluation
+
+**Accountable delivery role:** Data Scientist / Decision Modelling Analyst. **Business reviewer:** Security Operations Centre Manager. **Independent assurance:** Security Model Assurance Analyst.
+
+**Required artefact:** docs/06-analysis/offline-lexical-detection-evaluation.md plus machine-readable evaluation_results.csv.
+
+**Content:** Simple lexical baseline versus candidate; domain-disjoint precision/recall, PR-AUC, legitimate FPR and confidence intervals; separate full-feature appendix if used.
+
+**Pass condition:** Training-only preprocessing; no live URL access; webpage/unverifiable corpus signals excluded from receipt-time model; report actual test FPR even if target is missed.
+
+**Evidence to retain:** actual output at final commit, source/configuration lineage, executed expected-versus-actual checks, reviewer identity/date and PASS/FAIL/BLOCKED. Do not mark complete from document presence alone.
+
+### SC3 / D7 — Three-band analyst triage policy
+
+**Accountable delivery role:** SOC and Threat Intelligence Analyst. **Business reviewer:** Security Operations Centre Manager. **Independent assurance:** Security Model Assurance Analyst.
+
+**Required artefact:** docs/07-decision-framework/three-band-analyst-triage-policy.csv plus policy.md.
+
+**Content:** Validation-selected high threshold targeting legitimate FPR≤1%, intermediate boundary and low-priority band; per-1,000 workload, missed phishing and ten defanged case records.
+
+**Pass condition:** Nonzero high-band coverage required for a viable threshold; if infeasible mark target unmet; every case has explanation, human owner, action/escalation and evidence hash; no automatic URL blocking.
+
+**Evidence to retain:** actual output at final commit, source/configuration lineage, executed expected-versus-actual checks, reviewer identity/date and PASS/FAIL/BLOCKED. Do not mark complete from document presence alone.
+
+### SC4 / D8 — SOC triage dashboard
+
+**Accountable delivery role:** BI / Decision Product Developer. **Business reviewer:** Security Operations Centre Manager. **Independent assurance:** Security Model Assurance Analyst.
+
+**Required artefact:** dashboard/README.md, runnable dashboard/prototype and static review export.
+
+**Content:** Band workload, false-positive/negative review, threshold trade-off and domain/source-quality views.
+
+**Pass condition:** Ten flagged legitimate among 1,000 legitimate=1% FPR; reviewer traces a false positive and missed phishing case; no clickable malicious URLs appear in exports.
+
+**Evidence to retain:** actual output at final commit, source/configuration lineage, executed expected-versus-actual checks, reviewer identity/date and PASS/FAIL/BLOCKED. Do not mark complete from document presence alone.
+
+### SC5 / D11 — SOC response playbook and tabletop
+
+**Accountable delivery role:** Business Analyst / Delivery Lead with domain specialist. **Business reviewer:** Security Operations Centre Manager. **Independent assurance:** Security Model Assurance Analyst.
+
+**Required artefact:** deliverables/soc-response-playbook-and-tabletop.pdf plus editable slides and supporting cards/runbook.
+
+**Content:** Ten worked cases including false positives/negatives and uncertain domains; evidence retention, escalation, incident-response handoff, analyst override and monitoring triggers.
+
+**Pass condition:** Two tabletop tasks pass: resolve legitimate high-score alert and escalate confirmed-in-fixture phishing; no browsing, DNS resolution, credential collection or claim of current live threat status.
+
+**Evidence to retain:** actual output at final commit, source/configuration lineage, executed expected-versus-actual checks, reviewer identity/date and PASS/FAIL/BLOCKED. Do not mark complete from document presence alone.
+
 
 ## DT1–DT10
 
@@ -36,13 +101,13 @@ Acceptance requires executed evidence, not headings. Security Model Assurance An
 
 Use small synthetic fixtures for edge cases and frozen-source checks where relevant. Clearly distinguish fixture results from measured source outputs. Retain expected/actual evidence in docs/08-assurance-uat/; automate deterministic calculations where practical and document UI/interpretation reviews.
 
-## Three UAT tasks
+## Three project-specific UAT tasks
 
-1. Security Operations Centre Manager finds K1, explains its denominator, snapshot and limitation.
-2. SOC and Threat Intelligence Analyst compares one baseline/alternative case and records accept/defer/override with rationale.
-3. An operational user traces an action to source evidence and finds the manual review/escalation owner.
+1. **Business review:** At daily SOC review, an analyst inspects high-risk and intermediate bands, reviews defanged examples and false positives/negatives, and follows a documented evidence-preservation and incident-response handoff. No listed URL is opened. The participant must explain the observed baseline, population and decision limitation without assistance from the author; record actual completion and any defect.
+2. **Policy challenge:** use the D7 artefact to compare a baseline and alternative case, then record accept/defer/override with evidence and accountable owner. The domain reviewer must independently reproduce the case outcome.
+3. **Operational walkthrough:** Ten flagged legitimate among 1,000 legitimate=1% FPR; reviewer traces a false positive and missed phishing case; no clickable malicious URLs appear in exports. Retain the task recording/screenshots, expected/actual values and reviewer outcome.
 
-Record participant role, expected/observed result, defect and retest. All three must pass; static exports may support review where interactive access is unavailable.
+All three must pass after defect retest. Static exports may support review if interactive access is unavailable. The independent reviewer also checks every SC output against its declared artefact and source/configuration lineage.
 
 ## Release
 

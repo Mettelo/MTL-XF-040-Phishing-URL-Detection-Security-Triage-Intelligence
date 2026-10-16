@@ -36,37 +36,57 @@ Profile types, nulls, duplicates, sentinels, labels, units and source support. A
 
 **Pass evidence:** Every treatment has affected count, reason, owner and reviewer; no silent row loss or coercion.
 
-## D5 — KPI catalogue and lineage
+## D5 — Phishing population and feature-availability audit
 
-**Due:** Week 4 · **Owner:** SOC and Threat Intelligence Analyst · **Team location:** docs/05-kpi-catalogue/
+**Due:** Week 4 · **Owner:** SOC and Threat Intelligence Analyst · **Business reviewer:** Security Operations Centre Manager · **Independent reviewer:** Security Model Assurance Analyst
 
-Implement K1–K7 below with actual source fields, code, valid population, denominator, units, grain, exclusions, owner and worked examples.
+**Required artefact:** data/curated/phishing-population-and-feature-availability-audit.csv and docs/05-kpi-catalogue/phishing-population-and-feature-availability-audit.md.
 
-**Pass evidence:** All seven reviewed; K1–K5 reconcile independently and in BI on full cohort and one filtered slice.
+235,795 source records, label map, duplicate/conflict/quarantine counts, offline registrable-domain grouping and every predictor classified lexical/webpage/corpus-derived/identifier.
 
-## D6 — Analysis and evaluation
+**Mandatory pass condition (SC1):** label=0 becomes phishing_event=1; initial class counts reconcile to 100,945 phishing/134,850 legitimate; zero domain overlap across splits; raw URL/Domain/FILENAME/Title identifiers excluded from core.
 
-**Due:** Week 6 · **Owner:** Data Scientist / Decision Modelling Analyst · **Team location:** docs/06-analysis/
+**Review evidence:** retain the actual output, source-to-field/code/configuration lineage, expected/actual verification, reviewer and date. A heading, screenshot or unsupported claim alone cannot satisfy this deliverable.
 
-Group-based approximately 60/20/20 train/validation/test by registrable domain using seed 40; missing/unparseable domains stay in a quarantine table. Keep duplicate normalised URLs in one group. Fit all learned preprocessing on train. Exclude URL, Domain, FILENAME and label identifiers; core lexical-only model excludes webpage-derived and unverifiable corpus-derived features, including URLSimilarityIndex/TLDLegitimateProb/URLCharProb unless train-only derivation can be reproduced. A full provided-feature offline model may be reported separately with provenance caveats.
 
-**Pass evidence:** Baseline and alternative results, population/class counts, uncertainty, negative findings and feature/timing audit retained; no test-driven tuning.
+## D6 — Offline lexical detection evaluation
 
-## D7 — Decision policy and action register
+**Due:** Week 6 · **Owner:** Data Scientist / Decision Modelling Analyst · **Business reviewer:** Security Operations Centre Manager · **Independent reviewer:** Security Model Assurance Analyst
 
-**Due:** Week 6 · **Owner:** SOC and Threat Intelligence Analyst · **Team location:** docs/07-decision-framework/
+**Required artefact:** docs/06-analysis/offline-lexical-detection-evaluation.md plus machine-readable evaluation_results.csv.
 
-Baseline simple lexical rule IsDomainIP=1 or URLLength>100 (project rule); compare validation-selected lexical model with review thresholds. Choose high-risk threshold maximising phishing recall subject to validation legitimate FPR≤1%; if infeasible mark target unmet. Add intermediate review band at score≥0.50 and below high threshold (if high threshold<0.50 choose and document lower review boundary on validation). Never auto-open or automatically block URLs.
+Simple lexical baseline versus candidate; domain-disjoint precision/recall, PR-AUC, legitimate FPR and confidence intervals; separate full-feature appendix if used.
 
-**Pass evidence:** Both policies and sensitivity outputs supplied; every action has evidence, eligibility, owner, next review and uncertainty. Include a defer case.
+**Mandatory pass condition (SC2):** Training-only preprocessing; no live URL access; webpage/unverifiable corpus signals excluded from receipt-time model; report actual test FPR even if target is missed.
 
-## D8 — Dashboard / decision prototype
+**Review evidence:** retain the actual output, source-to-field/code/configuration lineage, expected/actual verification, reviewer and date. A heading, screenshot or unsupported claim alone cannot satisfy this deliverable.
 
-**Due:** Week 7 · **Owner:** BI / Decision Product Developer · **Team location:** dashboard/
 
-Four linked views: K1–K7 executive overview, source-supported diagnostics, policy/action comparison and quality/limitations for Security Operations Centre Manager.
+## D7 — Three-band analyst triage policy
 
-**Pass evidence:** Five metric/filter checks pass; frozen scope and limitations survive export; static copy/user guide require no paid access.
+**Due:** Week 6 · **Owner:** SOC and Threat Intelligence Analyst · **Business reviewer:** Security Operations Centre Manager · **Independent reviewer:** Security Model Assurance Analyst
+
+**Required artefact:** docs/07-decision-framework/three-band-analyst-triage-policy.csv plus policy.md.
+
+Validation-selected high threshold targeting legitimate FPR≤1%, intermediate boundary and low-priority band; per-1,000 workload, missed phishing and ten defanged case records.
+
+**Mandatory pass condition (SC3):** Nonzero high-band coverage required for a viable threshold; if infeasible mark target unmet; every case has explanation, human owner, action/escalation and evidence hash; no automatic URL blocking.
+
+**Review evidence:** retain the actual output, source-to-field/code/configuration lineage, expected/actual verification, reviewer and date. A heading, screenshot or unsupported claim alone cannot satisfy this deliverable.
+
+
+## D8 — SOC triage dashboard
+
+**Due:** Week 7 · **Owner:** BI / Decision Product Developer · **Business reviewer:** Security Operations Centre Manager · **Independent reviewer:** Security Model Assurance Analyst
+
+**Required artefact:** dashboard/README.md, runnable dashboard/prototype and static review export.
+
+Band workload, false-positive/negative review, threshold trade-off and domain/source-quality views.
+
+**Mandatory pass condition (SC4):** Ten flagged legitimate among 1,000 legitimate=1% FPR; reviewer traces a false positive and missed phishing case; no clickable malicious URLs appear in exports.
+
+**Review evidence:** retain the actual output, source-to-field/code/configuration lineage, expected/actual verification, reviewer and date. A heading, screenshot or unsupported claim alone cannot satisfy this deliverable.
+
 
 ## D9 — Independent assurance and UAT
 
@@ -84,13 +104,18 @@ One documented run entry point, dependency versions, manifest, output checksums/
 
 **Pass evidence:** Second member reproduces all seven KPIs and policy queue from approved bytes; environment, elapsed time and discrepancies recorded.
 
-## D11 — Executive recommendation
+## D11 — SOC response playbook and tabletop
 
-**Due:** Week 8 · **Owner:** Delivery Lead + domain specialist · **Team location:** deliverables/
+**Due:** Week 8 · **Owner:** Business Analyst / Delivery Lead with domain specialist · **Business reviewer:** Security Operations Centre Manager · **Independent reviewer:** Security Model Assurance Analyst
 
-8–12 slides and a 5–10-minute demo answering Choose an offline URL-risk triage threshold, analyst review bands and incident-response handoff rules. Include five evidence-linked findings, three next actions, comparison and a defer case.
+**Required artefact:** deliverables/soc-response-playbook-and-tabletop.pdf plus editable slides and supporting cards/runbook.
 
-**Pass evidence:** Every numeric claim links tested evidence; costs/benefits and operational targets are labelled assumptions unless measured.
+Ten worked cases including false positives/negatives and uncertain domains; evidence retention, escalation, incident-response handoff, analyst override and monitoring triggers.
+
+**Mandatory pass condition (SC5):** Two tabletop tasks pass: resolve legitimate high-score alert and escalate confirmed-in-fixture phishing; no browsing, DNS resolution, credential collection or claim of current live threat status.
+
+**Review evidence:** retain the actual output, source-to-field/code/configuration lineage, expected/actual verification, reviewer and date. A heading, screenshot or unsupported claim alone cannot satisfy this deliverable.
+
 
 ## D12 — Contribution and final submission
 
@@ -118,7 +143,7 @@ Zero denominators produce unavailable values with reasons. Do not average subgro
 
 ## Evaluation and decision policy
 
-Group-based approximately 60/20/20 train/validation/test by registrable domain using seed 40; missing/unparseable domains stay in a quarantine table. Keep duplicate normalised URLs in one group. Fit all learned preprocessing on train. Exclude URL, Domain, FILENAME and label identifiers; core lexical-only model excludes webpage-derived and unverifiable corpus-derived features, including URLSimilarityIndex/TLDLegitimateProb/URLCharProb unless train-only derivation can be reproduced. A full provided-feature offline model may be reported separately with provenance caveats.
+Group-based approximately 60/20/20 train/validation/test by registrable domain using seed 40; missing/unparseable domains stay in a quarantine table. Keep duplicate normalised URLs in one group. Fit all learned preprocessing on train. Exclude URL, Domain, FILENAME, Title and label identifiers; core lexical-only model excludes webpage-derived and unverifiable corpus-derived features, including URLSimilarityIndex/TLDLegitimateProb/URLCharProb unless train-only derivation can be reproduced. A full provided-feature offline model may be reported separately with provenance caveats.
 
 Baseline simple lexical rule IsDomainIP=1 or URLLength>100 (project rule); compare validation-selected lexical model with review thresholds. Choose high-risk threshold maximising phishing recall subject to validation legitimate FPR≤1%; if infeasible mark target unmet. Add intermediate review band at score≥0.50 and below high threshold (if high threshold<0.50 choose and document lower review boundary on validation). Never auto-open or automatically block URLs.
 
